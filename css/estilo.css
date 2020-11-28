@@ -28,3 +28,8 @@ input[type='submit']:hover{opacity: 0.5;}
     color: #fff;  
  }
 
+
+ .mensagem-erro{width: 400px; margin: 10px auto; display: block; padding: 10px; background-color:rgba(250,128,114,.3); border: 1px solid rgb(165,42,42); text-align: center; }
+
+ #mensagem-sucesso{width: 400px; margin: 10px auto; display: block; padding: 10px; background-color:rgba(50,205,50,.3); border: 1px solid rgb(34,134,34); text-align: center; }
+
