@@ -22,7 +22,6 @@ Class Usuario{
         $sql->bindValue(":e", $email);
         $sql->execute();
 
-        
 
         if($sql->rowCount() > 0){
            return false;
@@ -30,7 +29,7 @@ Class Usuario{
              $sql = $pdo->prepare("INSERT usuarios (nome, email, senha) VALUES (:n, :e, :s)");
              $sql->bindValue(":n", $nome);
              $sql->bindValue(":e", $email);
-             $sql->bindValue(":s", $senha);
+             $sql->bindValue(":s", md5($senha));
              $sql->execute();
              return true;
         }
@@ -40,8 +39,19 @@ Class Usuario{
         global $pdo;
 
         //verificar se o e-mail está cadastrado
+        $sql = $pdo->prepare("SELECT id from usuarios where email = :e AND senha = :s");
+        $sql->bindValue(':e', $email);
+        $sql->bindValue(':s', md5($senha));
+        $sql->execute();
 
-
+        if($sql->rowCount() > 0){
+            $dado = $sql->fetch();
+            session_start();
+            $_SESSION['id_usuario'] = $dado['id'];
+            return true;
+        }else{
+            return false;
+        }
 
 
     }
